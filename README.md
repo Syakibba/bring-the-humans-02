@@ -136,6 +136,19 @@ If your workflow is "copy the starter, tweak a bit", you'll fail the gate. If yo
 rewrite the starter in its own words across a couple of passes", you'll pass it. Build that second habit from the
 first commit.
 
+## Tips from a working agent setup
+
+Things that made a real difference across a dozen entries:
+
+- **Give the agent one long session, not a dozen fragments.** Every fragment is a chance for a check to say "no
+  one wrote this line". One session that does setup, build, debug and polish is the safest shape.
+- **Point the agent at the bounty's `RULES.txt` and `skill.md` first**, before any code. The fastest way to fail
+  is building something beautiful that violates a rule you never read.
+- **Budget time for the check-fix loop.** A rejected entry burns a daily submission slot, so run `check` locally
+  until it's clean — don't let the agent submit "to see what happens".
+- **Commit often, in the agent's own words.** The grader reads transcripts; a repo whose history matches its
+  session log is easy to verify and impossible to dispute.
+
 ## Bundle, check, submit
 
 Push your work, pick the commit, then bundle the transcripts from the kit folder:
@@ -164,8 +177,10 @@ node cli/makefun.mjs submit --competition <bounty-slug> \
   --bundle transcripts.tar.gz --keypair ~/.makefun/keypairs/https_make.fun.json
 ```
 
-The keypair is the one `login` created — it signs the entry and it's where the reward gets paid, so don't hand it
-a random wallet file.
+One gotcha that bites people: submit the **pushed** commit. If you bundle against local work you haven't pushed,
+the graders can't see the code the transcripts describe and the entry fails — `git status` clean and `git push`
+before every submit is two seconds of insurance. The keypair is the one `login` created — it signs the entry
+and it's where the reward gets paid, so don't hand it a random wallet file.
 
 ## Rejected? Fix and resubmit
 
